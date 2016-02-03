@@ -3,16 +3,23 @@
  */
 public class Account {
 
-
-// Set up Vars
-
-
-// Constructors if used
-
-
-/** Start Getters and Setters */
+    // Set up Vars
+    private String name;
+    private double balance;
+    private boolean isAccountEmpty, isAccountNegative;
 
 
-/** End of Getters and Setters */
+    //begin methods
+
+    public void getUserName() throws Exception {
+
+        System.out.println("Please Enter First and Last Name: ");
+        this.name = Atm.scanner.nextLine();
+        if (name.isEmpty() || name.equals("") || name.equals(" ") || !name.contains(" ")) {
+            throw new Exception("You have not entered your name.");
+        }
+
+    }
+
 
 }
