@@ -2,6 +2,7 @@ import java.util.Scanner;
 
 /**
  * Created by branden on 2/3/16 at 12:33.
+ * Creating a magical ATM that gives you $100 every time you enter your into your account. 
  */
 public class Atm {
     static Scanner scanner = new Scanner(System.in);
