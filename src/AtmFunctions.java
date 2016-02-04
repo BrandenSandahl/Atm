@@ -14,7 +14,7 @@ public class AtmFunctions {
 
     //turn on the ATM
     public static void turnOn() throws InterruptedException {
-        System.out.println("Loading....");
+        System.out.printf("Loading....%n%n");
         Thread.sleep(2000);
         System.out.println("Welcome to the ATM. Please enjoy your ATM using experience. Enter exit at any time to cancel");
     }
@@ -27,44 +27,45 @@ public class AtmFunctions {
     public static void logIn() throws InterruptedException {
         System.out.println("Please enter log in credentials");
         String tempUser = Utils.nextLine();
-        System.out.println("Accessing...");
+        System.out.printf("Accessing...%n%n");
         Thread.sleep(1000);
         if (Atm.user.account.containsKey(tempUser)) {
             Atm.user.currentUser = tempUser;
             System.out.println("Greetings, " + Atm.user.currentUser + ".");
         } else {
             Atm.user.account.put(tempUser, 100f);
-            System.out.println("I can not find " + Atm.user.currentUser + " in our system. An account has been created.");
+            Atm.user.currentUser = tempUser;
+            System.out.printf("I can not find " + Atm.user.currentUser + " in our system. An account has been created.%n%n");
             }
         }
 
 
-    //formats and returns users blanace
+    //formats and returns users balance
     public static void returnUserBalance() throws Exception {
-        System.out.printf("The balance for %s is currently: %.2f %n", Atm.user.getName(), Atm.user.getCurrentBalance());
+        System.out.printf("The balance for %s is currently: %.2f %n", Atm.user.currentUser, Atm.user.account.get(Atm.user.currentUser));
 
     }
     //withdraws funds and updates balance
     public static void withdrawFunds() throws Exception {
         System.out.println("How much would you like to withdraw?");
         float withdrawAmount = Utils.stringToInt(Utils.nextLine());
-        if (withdrawAmount > Atm.user.getCurrentBalance()) {
+        if (withdrawAmount > Atm.user.account.get(Atm.user.currentUser)) {
             throw new Exception("You are attempting to withdraw more than you have");
         } else if (withdrawAmount == 0) {
             throw new Exception("You have entered 0");
         } else {
-            Atm.user.setCurrentBalance(Atm.user.getStartBalance() - withdrawAmount);
-            System.out.printf("You have withdrawn %.2f, your remaining balance is %.2f %n", withdrawAmount, Atm.user.getCurrentBalance());
+            Atm.user.account.put(Atm.user.currentUser, Atm.user.account.get(Atm.user.currentUser) - withdrawAmount);
+            System.out.printf("You have withdrawn %.2f, your remaining balance is %.2f %n", withdrawAmount, Atm.user.account.get(Atm.user.currentUser));
         }
 
     }
 
     //gives user a choice, and calls methods based on that choice
     public static void userSelection() throws Exception {
-        System.out.printf("Select an option number %n1. Check my balance %n2. Withdraw funds %n3. Cancel Transaction %n");
+        System.out.printf("Select an option number %n1. Check my balance %n2. Withdraw funds %n3. Cancel Transaction %n4. Remove account %n");
         optionSelected = Utils.stringToInt((Utils.nextLine()));
-        if (optionSelected > 3 || optionSelected <= 0) {
-            throw new Exception("1 2 3 . Those are your options. Simple enough. Try again. ");
+        if (optionSelected > 4 || optionSelected <= 0) {
+            throw new Exception("1 2 3 4. Those are your options. Simple enough. Try again. ");
         } else {
             if (optionSelected == 1) {
                 returnUserBalance();
@@ -72,6 +73,13 @@ public class AtmFunctions {
                 withdrawFunds();
             } else if (optionSelected == 3) {
                 System.out.println("Session canceled");
+            } else if (optionSelected == 4)  {
+                System.out.println("This will permanently delete your account. Please confirm by entering your account name again");
+                if (Utils.nextLine().equalsIgnoreCase(Atm.user.currentUser)){
+                    Atm.user.account.remove(Atm.user.currentUser);
+                } else {
+                    System.out.println("canceling removal");
+                }
             }
         }
 

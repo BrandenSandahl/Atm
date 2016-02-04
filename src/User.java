@@ -11,8 +11,8 @@ public class User {
     public HashMap<String, Float> account = new HashMap<>(); //hashmap to store user and account
     private String name;
     public String currentUser;
-    private float startBalance = 100;
-    private float currentBalance = startBalance;
+    //private float startBalance = 100;
+    //private float currentBalance = startBalance;
     //private boolean isAccountEmpty, isAccountNegative;
 
 
@@ -29,6 +29,8 @@ public class User {
         }
     }
 
+
+    /**
     //startBalance
     public float getStartBalance() {
         return startBalance;
@@ -41,6 +43,8 @@ public class User {
     public void setCurrentBalance(float currentBalance) {
         this.currentBalance = currentBalance;
     }
+
+     */
 
     /** End of Getters and Setters */
 
