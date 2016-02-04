@@ -11,26 +11,28 @@ public class AtmFunctions {
 
 
     //methods
+
+    //turn on the ATM
     public static void turnOn() throws InterruptedException {
         System.out.println("Loading....");
         Thread.sleep(2000);
         System.out.println("Welcome to the ATM. Please enjoy your ATM using experience");
     }
-
+    //turn off the ATM
     public static void turnOff() {
         System.out.println("Thank you for using. User.");
     }
-
+    //Prompt user for name, then set to the user object (validation is done there)
     public static void getUser() throws Exception {
         System.out.println("Please Enter First and Last Name: ");
         Atm.user.setName(Utils.scanner.nextLine());
     }
-
+    //formats and returns users blanace
     public static void returnUserBalance() throws Exception {
         System.out.printf("The balance for %s is currently: %.2f %n", Atm.user.getName(), Atm.user.getCurrentBalance());
 
     }
-
+    //withdraws funds and updates balance
     public static void withdrawFunds() throws Exception {
         System.out.println("How much would you like to withdraw?");
         float withdrawAmount = Utils.stringToInt(Utils.scanner.nextLine());
@@ -45,7 +47,7 @@ public class AtmFunctions {
 
     }
 
-
+    //gives user a choice, and calls methods based on that choice
     public static void userSelection() throws Exception {
         System.out.printf("Select an option number %n1. Check my balance %n2. Withdraw funds %n3. Cancel Transaction %n");
         optionSelected = Utils.stringToInt((Utils.scanner.nextLine()));

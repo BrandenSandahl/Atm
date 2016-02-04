@@ -18,7 +18,7 @@ public class User {
     }
     public void setName(String name) throws Exception {
         if (name.isEmpty() || name.equals("") || name.equals(" ") || !name.contains(" ")) {
-            throw new Exception("You have not entered your name.");
+            throw new Exception("You have not entered a valid name.");
        } else {
             this.name = name;
         }
