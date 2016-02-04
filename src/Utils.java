@@ -12,7 +12,16 @@ public class Utils {
 
     //begin utilities
     public static int stringToInt(String tempNumber) {
-            return Integer.valueOf(tempNumber);
-        }
+        return Integer.valueOf(tempNumber);
     }
 
+
+    //this will catch user input and kill the program if input = exit
+    public static String nextLine() {
+        String lineIn = scanner.nextLine();
+        while (lineIn.equalsIgnoreCase("exit")) {
+            System.exit(0);
+        }
+        return lineIn;
+    }
+}
