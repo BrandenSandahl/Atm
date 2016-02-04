@@ -20,7 +20,7 @@ public class Utils {
     public static String nextLine() {
         String lineIn = scanner.nextLine();
         while (lineIn.equalsIgnoreCase("exit")) {
-            System.exit(0);
+            AtmFunctions.turnOff();
         }
         return lineIn;
     }

@@ -24,10 +24,21 @@ public class AtmFunctions {
         System.exit(0);
     }
     //Prompt user for name, then set to the user object (validation is done there)
-    public static void getUser() throws Exception {
-        System.out.println("Please Enter First and Last Name: ");
-        Atm.user.setName(Utils.nextLine());
-    }
+    public static void logIn() throws InterruptedException {
+        System.out.println("Please enter log in credentials");
+        String tempUser = Utils.nextLine();
+        System.out.println("Accessing...");
+        Thread.sleep(1000);
+        if (Atm.user.account.containsKey(tempUser)) {
+            Atm.user.currentUser = tempUser;
+            System.out.println("Greetings, " + Atm.user.currentUser + ".");
+        } else {
+            Atm.user.account.put(tempUser, 100f);
+            System.out.println("I can not find " + Atm.user.currentUser + " in our system. An account has been created.");
+            }
+        }
+
+
     //formats and returns users blanace
     public static void returnUserBalance() throws Exception {
         System.out.printf("The balance for %s is currently: %.2f %n", Atm.user.getName(), Atm.user.getCurrentBalance());
