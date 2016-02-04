@@ -27,6 +27,7 @@ public class AtmFunctions {
     public static void logIn() throws InterruptedException {
         System.out.println("Please enter log in credentials");
         String tempUser = Utils.nextLine();
+        tempUser = tempUser.toLowerCase();
         System.out.printf("Accessing...%n%n");
         Thread.sleep(1000);
         if (Atm.user.account.containsKey(tempUser)) {
