@@ -8,8 +8,8 @@ import java.util.HashMap;
 public class User {
 
     // Set up Vars
-    public HashMap<String, Float> account = new HashMap<>(); //hashmap to store user and account
-    public String currentUser;
+
+
 
 
 

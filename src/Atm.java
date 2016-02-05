@@ -1,4 +1,4 @@
-
+import java.util.HashMap;
 
 /**
  * Created by branden on 2/3/16 at 12:33.
@@ -7,7 +7,8 @@
  */
 public class Atm {
 
-    static User user = new User();  //this is static because only one person can use this ATM at a time. It will never have multiple users
+    public static HashMap<String, Float> account = new HashMap<>(); //hashmap to store user and account
+    //static User user = new User();  //this is static because only one person can use this ATM at a time. It will never have multiple users
 
     public static void main(String[] args) throws Exception {
 

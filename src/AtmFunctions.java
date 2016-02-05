@@ -7,6 +7,7 @@ public class AtmFunctions {
 
 
     // Set up Vars
+    public static String currentUser;
 
 
     //methods
@@ -38,15 +39,15 @@ public class AtmFunctions {
                 isValidName = true;
             }
         }
-        if (Atm.user.account.containsKey(tempUser)) {
-            Atm.user.currentUser = tempUser;
-            System.out.println("Greetings, " + Atm.user.currentUser + ".");
+        if (Atm.account.containsKey(tempUser)) {
+            currentUser = tempUser;
+            System.out.println("Greetings, " + currentUser + ".");
             System.out.println("");
             userSelection();
         } else {
-            Atm.user.account.put(tempUser, 100f);
-            Atm.user.currentUser = tempUser;
-            System.out.printf("I can not find " + Atm.user.currentUser + " in our system. An account has been created.%n%n");
+            Atm.account.put(tempUser, 100f);
+            currentUser = tempUser;
+            System.out.printf("I can not find " + currentUser + " in our system. An account has been created.%n%n");
             userSelection();
             }
         }
@@ -56,7 +57,7 @@ public class AtmFunctions {
 
     //formats and returns users balance
     public static void returnUserBalance() throws Exception {
-        System.out.printf("The balance for %s is currently: %.2f %n", Atm.user.currentUser, Atm.user.account.get(Atm.user.currentUser));
+        System.out.printf("The balance for %s is currently: %.2f %n", currentUser, Atm.account.get(currentUser));
 
     }
     //withdraws funds and updates balance
@@ -65,7 +66,7 @@ public class AtmFunctions {
         float withdrawAmount = Utils.stringToInt(Utils.nextLine());
         boolean isValidNumber = false;
         while (!isValidNumber) {
-            if (withdrawAmount > Atm.user.account.get(Atm.user.currentUser)) {
+            if (withdrawAmount > Atm.account.get(currentUser)) {
                 System.out.println("You are attempting to withdraw more than you have. Please try again");
                 withdrawAmount = Utils.stringToInt(Utils.nextLine());
             } else if (withdrawAmount <= 0) {
@@ -75,8 +76,8 @@ public class AtmFunctions {
                 isValidNumber = true;
             }
         }
-            Atm.user.account.put(Atm.user.currentUser, Atm.user.account.get(Atm.user.currentUser) - withdrawAmount);
-            System.out.printf("You have withdrawn %.2f, your remaining balance is %.2f %n", withdrawAmount, Atm.user.account.get(Atm.user.currentUser));
+            Atm.account.put(currentUser, Atm.account.get(currentUser) - withdrawAmount);
+            System.out.printf("You have withdrawn %.2f, your remaining balance is %.2f %n", withdrawAmount, Atm.account.get(currentUser));
     }
 
 
@@ -97,8 +98,8 @@ public class AtmFunctions {
                 break;
             case 3:
                 System.out.println("This will permanently delete your account. Please confirm by entering your account name again");
-                if (Utils.nextLine().equalsIgnoreCase(Atm.user.currentUser)) {
-                    Atm.user.account.remove(Atm.user.currentUser);
+                if (Utils.nextLine().equalsIgnoreCase(currentUser)) {
+                    Atm.account.remove(currentUser);
                 } else {
                     System.out.println("canceling removal");
                 }
