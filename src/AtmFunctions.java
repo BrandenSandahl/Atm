@@ -63,15 +63,15 @@ public class AtmFunctions {
     //withdraws funds and updates balance
     public static void withdrawFunds() throws Exception {
         System.out.println("How much would you like to withdraw?");
-        float withdrawAmount = Utils.stringToInt(Utils.nextLine());
+        float withdrawAmount = Utils.stringToFloat(Utils.nextLine());
         boolean isValidNumber = false;
         while (!isValidNumber) {
             if (withdrawAmount > Atm.account.get(currentUser)) {
                 System.out.println("You are attempting to withdraw more than you have. Please try again");
-                withdrawAmount = Utils.stringToInt(Utils.nextLine());
+                withdrawAmount = Utils.stringToFloat(Utils.nextLine());
             } else if (withdrawAmount <= 0) {
                 System.out.println("You have entered an impossible amount. Please try again");
-                withdrawAmount = Utils.stringToInt(Utils.nextLine());
+                withdrawAmount = Utils.stringToFloat(Utils.nextLine());
             } else {
                 isValidNumber = true;
             }
@@ -83,6 +83,7 @@ public class AtmFunctions {
 
 
     //gives user a choice, and calls methods based on that choice
+    //note that if you JUST push enter for this it breaks the program. I do not know why.
     public static void userSelection() throws Exception {
         System.out.printf("Select an option number %n1. Check my balance %n2. Withdraw funds %n3. Remove account %n4. Return to log in %n");
         int optionSelected;
@@ -109,6 +110,10 @@ public class AtmFunctions {
                 System.out.println("Returning");
                 logIn();
                 break;
+            default:
+                System.out.println("You entered a value I cannot recognize. Please try again");
+                userSelection();
+
         }
 
     }

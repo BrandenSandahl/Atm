@@ -1,3 +1,4 @@
+import java.util.DoubleSummaryStatistics;
 import java.util.Scanner;
 
 /**
@@ -13,6 +14,13 @@ public class Utils {
     //begin utilities
     public static int stringToInt(String tempNumber) {
         return Integer.valueOf(tempNumber);
+    }
+    public static double stringToDouble(String tempNumber) {
+        return Double.parseDouble(tempNumber);
+
+    }
+    public static float stringToFloat(String tempNumber) {
+        return Float.parseFloat(tempNumber);
     }
 
 
