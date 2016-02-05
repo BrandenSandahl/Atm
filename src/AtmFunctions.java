@@ -69,8 +69,8 @@ public class AtmFunctions {
             if (withdrawAmount > Atm.user.account.get(Atm.user.currentUser)) {
                 System.out.println("You are attempting to withdraw more than you have. Please try again");
                 withdrawAmount = Utils.stringToInt(Utils.nextLine());
-            } else if (withdrawAmount == 0) {
-                System.out.println("You have entered 0. Please try again");
+            } else if (withdrawAmount >= 0) {
+                System.out.println("You have entered an impossible amount. Please try again");
                 withdrawAmount = Utils.stringToInt(Utils.nextLine());
             } else {
                 isValidNumber = true;
