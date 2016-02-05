@@ -8,7 +8,7 @@ import java.util.HashMap;
 public class Atm {
 
     public static HashMap<String, Float> account = new HashMap<>(); //hashmap to store user and account
-    //static User user = new User();  //this is static because only one person can use this ATM at a time. It will never have multiple users
+
 
     public static void main(String[] args) throws Exception {
 
