@@ -23,22 +23,34 @@ public class AtmFunctions {
         System.out.println("Thank you for using. User.");
         System.exit(0);
     }
-    //Prompt user for name, then set to the user object (validation is done there)
+    //Prompt user for name, validate, then set to the user object
     public static void logIn() throws InterruptedException {
-        System.out.println("Please enter log in credentials");
-        String tempUser = Utils.nextLine();
-        tempUser = tempUser.toLowerCase();
+        System.out.println("Please enter log in credentials as user's full name");
+        String tempUser = Utils.nextLine().toLowerCase();
+        boolean isValidName = false;
+        // tempUser = tempUser.toLowerCase();
         System.out.printf("Accessing...%n%n");
         Thread.sleep(1000);
-        if (Atm.user.account.containsKey(tempUser)) {
-            Atm.user.currentUser = tempUser;
-            System.out.println("Greetings, " + Atm.user.currentUser + ".");
-        } else {
-            Atm.user.account.put(tempUser, 100f);
-            Atm.user.currentUser = tempUser;
-            System.out.printf("I can not find " + Atm.user.currentUser + " in our system. An account has been created.%n%n");
+        while (isValidName == false) {
+            if (tempUser.isEmpty() || tempUser.equals("") || tempUser.equals(" ") || !tempUser.contains(" ")) {
+                System.out.println("You have entered your name in an invalid format, please try again");
+                tempUser = Utils.nextLine().toLowerCase();
+            } else {
+                isValidName = true;
             }
         }
+            if (Atm.user.account.containsKey(tempUser)) {
+                Atm.user.currentUser = tempUser;
+                System.out.println("Greetings, " + Atm.user.currentUser + ".");
+                System.out.println("");
+            } else {
+                Atm.user.account.put(tempUser, 100f);
+                Atm.user.currentUser = tempUser;
+                System.out.printf("I can not find " + Atm.user.currentUser + " in our system. An account has been created.%n%n");
+            }
+        }
+
+
 
 
     //formats and returns users balance
