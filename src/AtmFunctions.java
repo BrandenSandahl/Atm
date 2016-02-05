@@ -31,7 +31,7 @@ public class AtmFunctions {
         // tempUser = tempUser.toLowerCase();
         System.out.printf("Accessing...%n%n");
         Thread.sleep(1000);
-        while (isValidName == false) {
+        while (!isValidName) {
             if (tempUser.isEmpty() || tempUser.equals("") || tempUser.equals(" ") || !tempUser.contains(" ")) {
                 System.out.println("You have entered your name in an invalid format, please try again");
                 tempUser = Utils.nextLine().toLowerCase();
@@ -64,16 +64,23 @@ public class AtmFunctions {
     public static void withdrawFunds() throws Exception {
         System.out.println("How much would you like to withdraw?");
         float withdrawAmount = Utils.stringToInt(Utils.nextLine());
-        if (withdrawAmount > Atm.user.account.get(Atm.user.currentUser)) {
-            throw new Exception("You are attempting to withdraw more than you have");
-        } else if (withdrawAmount == 0) {
-            throw new Exception("You have entered 0");
-        } else {
+        boolean isValidNumber = false;
+        while (!isValidNumber) {
+            if (withdrawAmount > Atm.user.account.get(Atm.user.currentUser)) {
+                System.out.println("You are attempting to withdraw more than you have. Please try again");
+                withdrawAmount = Utils.stringToInt(Utils.nextLine());
+            } else if (withdrawAmount == 0) {
+                System.out.println("You have entered 0. Please try again");
+                withdrawAmount = Utils.stringToInt(Utils.nextLine());
+            } else {
+                isValidNumber = true;
+            }
+        }
             Atm.user.account.put(Atm.user.currentUser, Atm.user.account.get(Atm.user.currentUser) - withdrawAmount);
             System.out.printf("You have withdrawn %.2f, your remaining balance is %.2f %n", withdrawAmount, Atm.user.account.get(Atm.user.currentUser));
-        }
-
     }
+
+
 
     //gives user a choice, and calls methods based on that choice
     public static void userSelection() throws Exception {
@@ -95,7 +102,7 @@ public class AtmFunctions {
                 } else {
                     System.out.println("canceling removal");
                 }
-                userSelection();
+                logIn();
                 break;
             case 4:
                 System.out.println("Returning");
