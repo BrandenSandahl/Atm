@@ -10,9 +10,8 @@ public class Atm {
 
     public static void main(String[] args) throws Exception {
 
-
+        AtmFunctions.turnOn();  //user pushes a power button. Because that's how ATMs work.
         while (true) {
-            AtmFunctions.turnOn();  //user pushes a power button. Because that's how ATMs work.
             AtmFunctions.logIn(); //Atm prompts user for name, "finds" the account (creates account in this case)
             AtmFunctions.userSelection(); //Atm reads in user selection, if user plays their cards right, they get $100 (there is not an actual card game attached)
         }

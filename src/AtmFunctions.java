@@ -24,7 +24,7 @@ public class AtmFunctions {
         System.exit(0);
     }
     //Prompt user for name, validate, then set to the user object
-    public static void logIn() throws InterruptedException {
+    public static void logIn() throws Exception {
         System.out.println("Please enter log in credentials as user's full name");
         String tempUser = Utils.nextLine().toLowerCase();
         boolean isValidName = false;
@@ -39,14 +39,16 @@ public class AtmFunctions {
                 isValidName = true;
             }
         }
-            if (Atm.user.account.containsKey(tempUser)) {
-                Atm.user.currentUser = tempUser;
-                System.out.println("Greetings, " + Atm.user.currentUser + ".");
-                System.out.println("");
-            } else {
-                Atm.user.account.put(tempUser, 100f);
-                Atm.user.currentUser = tempUser;
-                System.out.printf("I can not find " + Atm.user.currentUser + " in our system. An account has been created.%n%n");
+        if (Atm.user.account.containsKey(tempUser)) {
+            Atm.user.currentUser = tempUser;
+            System.out.println("Greetings, " + Atm.user.currentUser + ".");
+            System.out.println("");
+            userSelection();
+        } else {
+            Atm.user.account.put(tempUser, 100f);
+            Atm.user.currentUser = tempUser;
+            System.out.printf("I can not find " + Atm.user.currentUser + " in our system. An account has been created.%n%n");
+            userSelection();
             }
         }
 
@@ -75,25 +77,30 @@ public class AtmFunctions {
 
     //gives user a choice, and calls methods based on that choice
     public static void userSelection() throws Exception {
-        System.out.printf("Select an option number %n1. Check my balance %n2. Withdraw funds %n3. Cancel Transaction %n4. Remove account %n");
+        System.out.printf("Select an option number %n1. Check my balance %n2. Withdraw funds %n3. Remove account %n4. Return to log in %n");
         optionSelected = Utils.stringToInt((Utils.nextLine()));
-        if (optionSelected > 4 || optionSelected <= 0) {
-            throw new Exception("1 2 3 4. Those are your options. Simple enough. Try again. ");
-        } else {
-            if (optionSelected == 1) {
+        switch (optionSelected) {
+            case 1:
                 returnUserBalance();
-            } else if (optionSelected == 2) {
+                userSelection();
+                break;
+            case 2:
                 withdrawFunds();
-            } else if (optionSelected == 3) {
-                System.out.println("Session canceled");
-            } else if (optionSelected == 4)  {
+                userSelection();
+                break;
+            case 3:
                 System.out.println("This will permanently delete your account. Please confirm by entering your account name again");
-                if (Utils.nextLine().equalsIgnoreCase(Atm.user.currentUser)){
+                if (Utils.nextLine().equalsIgnoreCase(Atm.user.currentUser)) {
                     Atm.user.account.remove(Atm.user.currentUser);
                 } else {
                     System.out.println("canceling removal");
                 }
-            }
+                userSelection();
+                break;
+            case 4:
+                System.out.println("Returning");
+                logIn();
+                break;
         }
 
     }
