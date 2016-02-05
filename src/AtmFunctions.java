@@ -7,7 +7,6 @@ public class AtmFunctions {
 
 
     // Set up Vars
-    private static int optionSelected; //this can be static because again, it runs one time then ceases.
 
 
     //methods
@@ -69,7 +68,7 @@ public class AtmFunctions {
             if (withdrawAmount > Atm.user.account.get(Atm.user.currentUser)) {
                 System.out.println("You are attempting to withdraw more than you have. Please try again");
                 withdrawAmount = Utils.stringToInt(Utils.nextLine());
-            } else if (withdrawAmount >= 0) {
+            } else if (withdrawAmount <= 0) {
                 System.out.println("You have entered an impossible amount. Please try again");
                 withdrawAmount = Utils.stringToInt(Utils.nextLine());
             } else {
@@ -85,6 +84,7 @@ public class AtmFunctions {
     //gives user a choice, and calls methods based on that choice
     public static void userSelection() throws Exception {
         System.out.printf("Select an option number %n1. Check my balance %n2. Withdraw funds %n3. Remove account %n4. Return to log in %n");
+        int optionSelected;
         optionSelected = Utils.stringToInt((Utils.nextLine()));
         switch (optionSelected) {
             case 1:

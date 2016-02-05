@@ -3,6 +3,7 @@
 /**
  * Created by branden on 2/3/16 at 12:33.
  * Creating a magical ATM that gives you $100 every time you enter into your account.
+ * This is a wonderful machine.
  */
 public class Atm {
 
