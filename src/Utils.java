@@ -1,4 +1,3 @@
-import java.util.DoubleSummaryStatistics;
 import java.util.Scanner;
 
 /**

@@ -28,7 +28,6 @@ public class AtmFunctions {
         System.out.println("Please enter log in credentials as user's full name");
         String tempUser = Utils.nextLine().toLowerCase();
         boolean isValidName = false;
-        // tempUser = tempUser.toLowerCase();
         System.out.printf("Accessing...%n%n");
         Thread.sleep(1000);
         while (!isValidName) {
